@@ -8,7 +8,7 @@ Set Your Last.fm API Key and UserName
 
 ## Usage
 
-今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。
+今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。vsceはVSCodeの拡張機能をパッケージ化するためのツールです。各自の環境に合わせてインストールしてください。`npm install -g vsce` 等でインストールできます。
 
 APIキーとユーザー名をsettings.jsonに設定してください。  
 refreshIntervalのデフォルトは30000msです。
