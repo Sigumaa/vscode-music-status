@@ -1,10 +1,10 @@
 # music-status README
 
-Display the currently playing song from Last.fm in your VSCode status bar.
+Display the currently playing song from [Last.fm](https://www.last.fm/) in the status bar.
 
 ## Extension Setting
 
-Set Your Last.fm API Key and UserName
+Set Your [Last.fm](https://www.last.fm/) API Key and UserName in settings.json.
 
 ## Usage
 
