@@ -10,12 +10,16 @@ Set Your Last.fm API Key and UserName
 
 今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。
 
-APIキーとユーザー名をsettings.jsonに設定してください。
+APIキーとユーザー名をsettings.jsonに設定してください。  
+refreshIntervalのデフォルトは30000msです。
 
 ```json
 {
+    // required
     "music-status.apiKey": "Your Last.fm API Key",
     "music-status.user": "Your Last.fm UserName",
+    // optional
+    "music-status.refreshInterval": 30000,
 }
 ```
 

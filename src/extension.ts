@@ -22,18 +22,25 @@ async function getCurrentTrack(apiKey: string, user: string): Promise<string> {
     }
 }
 
+function loadConfiguration(): { apiKey: string | undefined, user: string | undefined } {
+    const config = vscode.workspace.getConfiguration('music-status');
+    const apiKey = config.get<string>('apiKey');
+    const user = config.get<string>('user');
+    return { apiKey, user };
+}
+
 let statusBar: vscode.StatusBarItem;
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, your extension "music-status" is now active!');
+	console.log('Congratulations, "music-status" is now active!');
 
-	const config = vscode.workspace.getConfiguration('music-status');
-	let apiKey = config.get<string>('apiKey');
-	let user = config.get<string>('user');
+	const { apiKey, user } = loadConfiguration();
 
 	if (!apiKey || !user) {
 		vscode.window.showErrorMessage('Please set your Last.fm API key and user name in the settings');
 	}
+	console.log('apiKey:', apiKey);
+	console.log('user:', user);
 
     statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBar.command = 'music-status.showCurrentTrack';
@@ -50,8 +57,11 @@ export function activate(context: vscode.ExtensionContext) {
 		}
     }
 
-    setInterval(updateTrack, 30000);
-    updateTrack();
+	updateTrack();
+	const refreshInterval = vscode.workspace.getConfiguration('music-status').get<number>('refreshInterval');
+	console.log('refreshInterval:', refreshInterval);
+    setInterval(updateTrack, refreshInterval);
+
 
     context.subscriptions.push(vscode.commands.registerCommand('music-status.showCurrentTrack', () => {
         vscode.window.showInformationMessage(statusBar.text.replace('$(run) ', ''));
@@ -59,8 +69,6 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 export function deactivate() {
-    if (statusBar) {
-        statusBar.dispose();
-    }
+    statusBar?.dispose();
 }
 

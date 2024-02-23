@@ -30,6 +30,11 @@
           "type": "string",
           "default": "",
           "description": "Last.fm username"
+        },
+        "music-status.refreshInterval": {
+          "type": "number",
+          "default": 30000,
+          "description": "Refresh interval in milliseconds"
         }
       }
     }
