@@ -15,7 +15,7 @@ async function getCurrentTrack(apiKey: string, user: string): Promise<string> {
         if (track['@attr'] && track['@attr'].nowplaying) {
             return `${track.artist['#text']} - ${track.name}`;
         }
-		return 'No track playing';
+        return 'No track playing';
     } catch (error) {
         console.error('Error fetching current track:', error);
         return 'Error fetching current track';
@@ -32,36 +32,34 @@ function loadConfiguration(): { apiKey: string | undefined, user: string | undef
 let statusBar: vscode.StatusBarItem;
 
 export function activate(context: vscode.ExtensionContext) {
-	console.log('Congratulations, "music-status" is now active!');
+    console.log('Congratulations, "music-status" is now active!');
 
-	const { apiKey, user } = loadConfiguration();
+    const { apiKey, user } = loadConfiguration();
 
-	if (!apiKey || !user) {
-		vscode.window.showErrorMessage('Please set your Last.fm API key and user name in the settings');
-	}
-	console.log('apiKey:', apiKey);
-	console.log('user:', user);
+    if (!apiKey || !user) {
+        vscode.window.showErrorMessage('Please set your Last.fm API key and user name in the settings');
+    }
+    console.log('apiKey:', apiKey);
+    console.log('user:', user);
 
     statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBar.command = 'music-status.showCurrentTrack';
-	statusBar.name = 'music-status';
+    statusBar.name = 'music-status';
     context.subscriptions.push(statusBar);
 
-
     async function updateTrack() {
-		if (apiKey && user) {
-			const track = await getCurrentTrack(apiKey, user);
-			statusBar.text = `$(run) ${track}`;
-			statusBar.tooltip = `Current track: ${track}`;
-			statusBar.show();
-		}
+        if (apiKey && user) {
+            const track = await getCurrentTrack(apiKey, user);
+            statusBar.text = `$(run) ${track}`;
+            statusBar.tooltip = `Current track: ${track}`;
+            statusBar.show();
+        }
     }
 
-	updateTrack();
-	const refreshInterval = vscode.workspace.getConfiguration('music-status').get<number>('refreshInterval');
-	console.log('refreshInterval:', refreshInterval);
+    updateTrack();
+    const refreshInterval = vscode.workspace.getConfiguration('music-status').get<number>('refreshInterval');
+    console.log('refreshInterval:', refreshInterval);
     setInterval(updateTrack, refreshInterval);
-
 
     context.subscriptions.push(vscode.commands.registerCommand('music-status.showCurrentTrack', () => {
         vscode.window.showInformationMessage(statusBar.text.replace('$(run) ', ''));
@@ -71,4 +69,3 @@ export function activate(context: vscode.ExtensionContext) {
 export function deactivate() {
     statusBar?.dispose();
 }
-
