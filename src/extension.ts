@@ -1,19 +1,25 @@
 import * as vscode from 'vscode';
 import axios from 'axios';
 
+interface Track {
+    artist: { '#text': string };
+    name: string;
+    '@attr'?: { nowplaying: boolean };
+}
+
 async function getCurrentTrack(apiKey: string, user: string): Promise<string> {
     const url = `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`;
     try {
-        const response = await axios.get(url);
+        const response = await axios.get<{ recenttracks: { track: Track[] } }>(url);
         const track = response.data.recenttracks.track[0];
         if (track['@attr'] && track['@attr'].nowplaying) {
             return `${track.artist['#text']} - ${track.name}`;
         }
+		return 'No track playing';
     } catch (error) {
         console.error('Error fetching current track:', error);
         return 'Error fetching current track';
     }
-    return 'No track playing';
 }
 
 let statusBar: vscode.StatusBarItem;
