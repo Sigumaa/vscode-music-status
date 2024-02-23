@@ -13,7 +13,7 @@ Set Your Last.fm API Key and UserName
 APIキーとユーザー名をsettings.jsonに設定してください。  
 refreshIntervalのデフォルトは30000msです。
 
-```json
+```text
 {
     // required
     "music-status.apiKey": "Your Last.fm API Key",
@@ -23,5 +23,8 @@ refreshIntervalのデフォルトは30000msです。
 }
 ```
 
-Ctrl + Shift + P でコマンドパレットを開き、`show current track` を選択してください。
+Ctrl + Shift + P でコマンドパレットを開き、`show current track` を選択してください。  
 ![csp](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image.png)
+
+再生中の音楽が右下に表示されるはずです。  
+![np](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-1.png)
