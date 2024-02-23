@@ -14,10 +14,25 @@
   "contributes": {
     "commands": [
       {
-        "command": "music-status.helloWorld",
-        "title": "Hello World"
+        "command": "music-status.showCurrentTrack",
+        "title": "show current track"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "Music Status",
+      "properties": {
+        "music-status.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Last.fm API key"
+        },
+        "music-status.user": {
+          "type": "string",
+          "default": "",
+          "description": "Last.fm username"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
