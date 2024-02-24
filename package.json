@@ -3,6 +3,7 @@
   "displayName": "music-status",
   "description": "Display the currently playing song from Last.fm in your VSCode status bar.",
   "version": "0.0.1",
+  "repository": "https://github.com/Sigumaa/vscode-music-status",
   "engines": {
     "vscode": "^1.86.0"
   },
