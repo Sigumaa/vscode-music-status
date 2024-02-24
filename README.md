@@ -1,17 +1,31 @@
-# music-status README
+# music-status
 
-Display the currently playing song from [Last.fm](https://www.last.fm/) in the status bar.
+VSCodeのステータスバーに再生中の音楽を表示する拡張機能です。  
+再生中の音楽は[Last.fm](https://www.last.fm/)のAPIを使って取得しています。  
+[Last.fm](https://www.last.fm/)は、音楽の再生履歴を記録してくれるサービスです。
 
-## Extension Setting
-
-Set Your [Last.fm](https://www.last.fm/) API Key and UserName in settings.json.
+![np](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-1.png)
 
 ## Usage
 
-今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。vsceはVSCodeの拡張機能をパッケージ化するためのツールです。各自の環境に合わせてインストールしてください。`npm install -g vsce` 等でインストールできます。
+今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。  
+vsceはVSCodeの拡張機能として使えるように、パッケージ化するためのツールです。  
 
-APIキーとユーザー名をsettings.jsonに設定してください。  
-refreshIntervalのデフォルトは30000msです。
+```bash
+git clone git@github.com:Sigumaa/vscode-music-status.git
+cd vscode-music-status
+npm install
+vsce package
+```
+
+package化に成功するとvsixファイルが生成されます。  
+VSCodeの拡張機能のインストール画面から、vsixファイルを選択してインストールしてください。
+
+![alt text](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-2.png)
+
+APIキーとユーザー名をVSCodeのsettings.jsonに設定してください。  
+refreshIntervalのデフォルトは30000msです。  
+[Last.fm](https://www.last.fm/)のドキュメントにAPIの制限回数が明言されていない(our sole discretionとか書いてある)ので、高頻度にリクエストを送るとAPI制限に引っかかる可能性があります。
 
 ```text
 {
