@@ -1,5 +1,8 @@
 # music-status
 
+<https://marketplace.visualstudio.com/items?itemName=shiyui.music-status>
+![alt text](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-3.png)
+
 VSCodeのステータスバーに再生中の音楽を表示する拡張機能です。  
 再生中の音楽は[Last.fm](https://www.last.fm/)のAPIを使って取得しています。  
 [Last.fm](https://www.last.fm/)は、音楽の再生履歴を記録してくれるサービスです。
@@ -12,10 +15,9 @@ VSCodeのステータスバーに再生中の音楽を表示する拡張機能�
 ## Usage
 
 ~~今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。~~  
+
 公開しました。  
 cloneして自分でpackageする場合はREADMEの下部を参照してください。
-
-<https://marketplace.visualstudio.com/items?itemName=shiyui.music-status>
 
 APIキーとユーザー名をVSCodeのsettings.jsonに設定してください。  
 refreshIntervalのデフォルトは30000msです。
