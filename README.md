@@ -11,20 +11,11 @@ VSCodeのステータスバーに再生中の音楽を表示する拡張機能�
 
 ## Usage
 
-今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。  
-vsceはVSCodeの拡張機能として使えるように、パッケージ化するためのツールです。  
+~~今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。~~  
+公開しました。  
+cloneして自分でpackageする場合はREADMEの下部を参照してください。
 
-```bash
-git clone git@github.com:Sigumaa/vscode-music-status.git
-cd vscode-music-status
-npm install
-vsce package
-```
-
-package化に成功するとvsixファイルが生成されます。  
-VSCodeの拡張機能のインストール画面から、vsixファイルを選択してインストールしてください。
-
-![alt text](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-2.png)
+<https://marketplace.visualstudio.com/items?itemName=shiyui.music-status>
 
 APIキーとユーザー名をVSCodeのsettings.jsonに設定してください。  
 refreshIntervalのデフォルトは30000msです。
@@ -41,10 +32,23 @@ refreshIntervalのデフォルトは30000msです。
 }
 ```
 
-Ctrl + Shift + P でコマンドパレットを開き、`show current track` を選択してください。  
-![csp](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image.png)
-
 再生中の音楽が右下に表示されるはずです。  
 ![np](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-1.png)
 
 また、ステータスバーのアイコンをクリックすると、再生中の音楽についての情報がわかるURLに飛ぶことができます。
+
+## vsceを用いる場合
+
+vsceはVSCodeの拡張機能として使えるように、パッケージ化するためのツールです。  
+
+```bash
+git clone git@github.com:Sigumaa/vscode-music-status.git
+cd vscode-music-status
+npm install
+vsce package
+```
+
+package化に成功するとvsixファイルが生成されます。  
+VSCodeの拡張機能のインストール画面から、vsixファイルを選択してインストールしてください。
+
+![alt text](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-2.png)
