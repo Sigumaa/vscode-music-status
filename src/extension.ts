@@ -35,20 +35,31 @@ let statusBar: vscode.StatusBarItem;
 export function activate(context: vscode.ExtensionContext) {
     console.log('Congratulations, "music-status" is now active!');
 
+    vscode.workspace.onDidChangeConfiguration((event) => {
+        if (event.affectsConfiguration('music-status')) {
+            const { apiKey, user } = loadConfiguration();
+            console.log('Configuration changed:', { apiKey, user });
+            if (!apiKey || !user) {
+                vscode.window.showErrorMessage('Please set your Last.fm API key and user name in the settings');
+            } else {
+                updateTrack(apiKey, user);
+            }
+        }
+    });
+    
     const { apiKey, user } = loadConfiguration();
 
     if (!apiKey || !user) {
         vscode.window.showErrorMessage('Please set your Last.fm API key and user name in the settings');
     }
-    console.log('apiKey:', apiKey);
-    console.log('user:', user);
 
     statusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
     statusBar.command = 'music-status.showCurrentTrack';
     statusBar.name = 'music-status';
     context.subscriptions.push(statusBar);
 
-    async function updateTrack() {
+    async function updateTrack(apiKey: string | undefined, user: string | undefined) {
+        console.log('Updating track...');
         if (apiKey && user) {
             const { title: track, url } = await getCurrentTrack(apiKey, user);
             statusBar.text = `$(run) ${track}`;
@@ -58,10 +69,10 @@ export function activate(context: vscode.ExtensionContext) {
         }
     }
 
-    updateTrack();
+    updateTrack(apiKey, user);
     const refreshInterval = vscode.workspace.getConfiguration('music-status').get<number>('refreshInterval');
     console.log('refreshInterval:', refreshInterval);
-    setInterval(updateTrack, refreshInterval);
+    setInterval(() => updateTrack(apiKey, user), refreshInterval);
 
     context.subscriptions.push(vscode.commands.registerCommand('music-status.showCurrentTrack', () => {
         vscode.window.showInformationMessage(statusBar.text.replace('$(run) ', ''));

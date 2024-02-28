@@ -5,13 +5,21 @@
   "version": "0.0.1",
   "repository": "https://github.com/Sigumaa/vscode-music-status",
   "publisher": "shiyui",
+  "license": "MIT",
+  "keywords": [
+    "music",
+    "last.fm",
+    "status bar"
+  ],
   "engines": {
     "vscode": "^1.86.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "*"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
