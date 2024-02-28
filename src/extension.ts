@@ -5,20 +5,21 @@ interface Track {
     artist: { '#text': string };
     name: string;
     '@attr'?: { nowplaying: boolean };
+    url: string;
 }
 
-async function getCurrentTrack(apiKey: string, user: string): Promise<string> {
+async function getCurrentTrack(apiKey: string, user: string): Promise<{ title: string, url: string }> {
     const url = `http://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${user}&api_key=${apiKey}&format=json&limit=1`;
     try {
         const response = await axios.get<{ recenttracks: { track: Track[] } }>(url);
         const track = response.data.recenttracks.track[0];
         if (track['@attr'] && track['@attr'].nowplaying) {
-            return `${track.artist['#text']} - ${track.name}`;
+            return { title: `${track.artist['#text']} - ${track.name}`, url: track.url };
         }
-        return 'No track playing';
+        return { title: 'No track playing', url: '' };
     } catch (error) {
         console.error('Error fetching current track:', error);
-        return 'Error fetching current track';
+        return { title: 'Error fetching current track', url: '' };
     }
 }
 
@@ -49,9 +50,10 @@ export function activate(context: vscode.ExtensionContext) {
 
     async function updateTrack() {
         if (apiKey && user) {
-            const track = await getCurrentTrack(apiKey, user);
+            const { title: track, url } = await getCurrentTrack(apiKey, user);
             statusBar.text = `$(run) ${track}`;
-            statusBar.tooltip = `Current track: ${track}`;
+            statusBar.tooltip = `Click to open track on Last.fm`;
+            statusBar.command = url ? { command: 'vscode.open', arguments: [vscode.Uri.parse(url)], title: 'Open track on Last.fm' } : undefined;
             statusBar.show();
         }
     }
