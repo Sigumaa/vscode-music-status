@@ -6,6 +6,9 @@ VSCodeのステータスバーに再生中の音楽を表示する拡張機能�
 
 ![np](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-1.png)
 
+使用するには、[Last.fm](https://www.last.fm/)のAPIキーが必要です。  
+また、[Last.fm Terms of Service](https://www.last.fm/api/tos)に従って使用してください。
+
 ## Usage
 
 今のところマーケットプレイスに公開する予定はないので、リポジトリをクローンして、`vsce package` でパッケージ化してください。  
@@ -24,7 +27,8 @@ VSCodeの拡張機能のインストール画面から、vsixファイルを選�
 ![alt text](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-2.png)
 
 APIキーとユーザー名をVSCodeのsettings.jsonに設定してください。  
-refreshIntervalのデフォルトは30000msです。  
+refreshIntervalのデフォルトは30000msです。
+
 [Last.fm](https://www.last.fm/)のドキュメントにAPIの制限回数が明言されていない(our sole discretionとか書いてある)ので、高頻度にリクエストを送るとAPI制限に引っかかる可能性があります。
 
 ```text
@@ -42,3 +46,5 @@ Ctrl + Shift + P でコマンドパレットを開き、`show current track` を
 
 再生中の音楽が右下に表示されるはずです。  
 ![np](https://raw.githubusercontent.com/Sigumaa/vscode-music-status/main/image-1.png)
+
+また、ステータスバーのアイコンをクリックすると、再生中の音楽についての情報がわかるURLに飛ぶことができます。
